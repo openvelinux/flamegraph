@@ -1,0 +1,20 @@
+Source: flamegraph
+Section: admin
+Priority: optional
+Maintainer: veLinux Team <velinux@openvenus.cn>
+Uploaders: veLinux Team <velinux@openvenus.cn>
+Build-Depends: debhelper (>= 10~), coreutils, help2man
+Standards-Version: 1.0 
+Homepage: https://github.com/brendangregg/FlameGraph
+
+Package: flamegraph
+Architecture: all
+Depends: binutils, perl-base 
+Description: Flame graphs visualize profiled code.  Stack samples can be captured
+ using Linux perf_events, FreeBSD pmcstat (hwpmc), DTrace, SystemTap, and
+ many other profilers.  This package contains only the visualizer script,
+ flamegraph.pl. 
+
+Package: flamegraph-demos
+Architecture: all
+Description: Demos of graphs produced by flamegraph 

@@ -1,0 +1,24 @@
+#!/usr/bin/make -f
+
+HELP2MANFLAGS = "--version-string=1.0 --no-discard-stderr"
+
+%:
+	dh $@
+
+override_dh_auto_install:
+	mkdir -p debian/flamegraph/usr/bin
+	mkdir -p debian/flamegraph/usr/share/man/man1
+	mkdir -p debian/flamegraph-demos/usr/share/flamegraph
+	chmod a+x stackcollapse-vtune.pl
+	for fil in aix-perf.pl difffolded.pl files.pl flamegraph.pl range-perf.pl \
+		stackcollapse-elfutils.pl stackcollapse-go.pl \
+		stackcollapse-java-exceptions.pl stackcollapse-jstack.pl; do \
+	    help2man "$(HELP2MANFLAGS)" ./"$$fil" > "$$fil".1; \
+	done
+	cp -p jmaps debian/flamegraph/usr/bin
+	cp -p *.awk debian/flamegraph/usr/bin
+	cp -p *.php debian/flamegraph/usr/bin
+	cp -p *.pl debian/flamegraph/usr/bin
+	cp -p *.1 debian/flamegraph/usr/share/man/man1
+	cp -p demos/* debian/flamegraph-demos/usr/share/flamegraph
+
